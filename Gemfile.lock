@@ -62,28 +62,12 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    aws-eventstream (1.1.0)
-    aws-partitions (1.320.0)
-    aws-sdk-core (3.96.1)
-      aws-eventstream (~> 1, >= 1.0.2)
-      aws-partitions (~> 1, >= 1.239.0)
-      aws-sigv4 (~> 1.1)
-      jmespath (~> 1.0)
-    aws-sdk-kms (1.31.0)
-      aws-sdk-core (~> 3, >= 3.71.0)
-      aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.66.0)
-      aws-sdk-core (~> 3, >= 3.96.1)
-      aws-sdk-kms (~> 1)
-      aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.1.3)
-      aws-eventstream (~> 1.0, >= 1.0.2)
     bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
-    chunky_png (1.3.11)
+    coderay (1.1.3)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -114,7 +98,6 @@ GEM
     hashdiff (1.0.1)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    jmespath (1.4.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -157,6 +140,11 @@ GEM
       mini_portile2 (~> 2.4.0)
     pg (1.2.3)
     promise.rb (0.7.4)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -214,10 +202,6 @@ GEM
       ffi (~> 1.0)
     redis (4.1.4)
     remotipart (1.4.4)
-    rqrcode (1.1.2)
-      chunky_png (~> 1.0)
-      rqrcode_core (~> 0.1)
-    rqrcode_core (0.1.2)
     safe_yaml (1.0.5)
     sassc (2.3.0)
       ffi (~> 1.9)
@@ -266,7 +250,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
@@ -278,12 +261,12 @@ DEPENDENCIES
   listen (~> 3.2)
   pg
   promise.rb
+  pry-rails
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.1)
   rails_admin (~> 2.0)
   redis (~> 4.0)
-  rqrcode
   sentry-raven
   shoulda-matchers
   sidekiq
