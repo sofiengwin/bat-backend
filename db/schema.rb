@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_25_172154) do
+ActiveRecord::Schema.define(version: 2020_07_25_172909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accumulation_tips", force: :cascade do |t|
+    t.bigint "tips_id", null: false
+    t.bigint "accumulation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accumulation_id"], name: "index_accumulation_tips_on_accumulation_id"
+    t.index ["tips_id"], name: "index_accumulation_tips_on_tips_id"
+  end
 
   create_table "accumulations", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -59,6 +68,8 @@ ActiveRecord::Schema.define(version: 2020_07_25_172154) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "accumulation_tips", "accumulations"
+  add_foreign_key "accumulation_tips", "tips", column: "tips_id"
   add_foreign_key "accumulations", "users"
   add_foreign_key "tips", "matches"
   add_foreign_key "tips", "users"
