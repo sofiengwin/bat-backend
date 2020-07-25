@@ -45,6 +45,7 @@ class GraphqlController < ApplicationController
 
   def current_user_id
     @variables = ensure_hash(params[:variables])
+    return nil
 
     return if @variables.has_key?('email') && @variables.has_key?('password')
     
