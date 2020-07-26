@@ -5,5 +5,6 @@ FactoryBot.define do
     outcome { "MyString" }
     body { "MyString" }
     match { nil }
+    bet { '1X'}
   end
 end

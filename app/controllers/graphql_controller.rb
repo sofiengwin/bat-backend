@@ -45,9 +45,8 @@ class GraphqlController < ApplicationController
 
   def current_user_id
     @variables = ensure_hash(params[:variables])
-    return nil
 
-    return if @variables.has_key?('email') && @variables.has_key?('password')
+    return unless @variables.has_key?('tips') && @variables.has_key?('userId')
     
     return if bearer_token && bearer_token.empty?
 
@@ -61,7 +60,7 @@ class GraphqlController < ApplicationController
   def current_user
     return unless current_user_id
 
-    Admin.find_by_id(current_user_id)
+    User.find_by_id(current_user_id)
   end
 
   def handle_error_in_development(e)
