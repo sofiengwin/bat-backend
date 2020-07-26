@@ -29,6 +29,7 @@ gem 'pg'
 gem 'sidekiq'
 gem 'sprockets', '~> 3'
 gem 'rails_admin', '~> 2.0'
+gem 'mongo'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
