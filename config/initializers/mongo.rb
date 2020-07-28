@@ -1,6 +1,12 @@
-# require 'mongo'
+require 'mongo'
 
+class MongoClient
+  def self.connection
+    mongoInstance = Mongo::Client.new("mongodb+srv://bat:batcrawler@bat.cvu6c.mongodb.net/bat?retryWrites=true&w=majority")
 
-# MONGO_CLIENT = Mongo::Client.new("mongodb+srv://bat:batcrawler@bat.cvu6c.mongodb.net/bat?retryWrites=true&w=majority")
+    yield mongoInstance['crawlers']
 
-# CRAWLER = MONGO_CLIENT['crawlers']
+  ensure
+    mongoInstance.close
+  end
+end
