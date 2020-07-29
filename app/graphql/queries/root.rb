@@ -2,6 +2,6 @@ module Queries
   class Root < GraphQL::Schema::Object
     graphql_name 'Query'
 
-    # field :fetchDriver, resolver: FetchDriverQuery
+    field :fetchTrending, resolver: FetchTrendingTipsQuery
   end
 end
