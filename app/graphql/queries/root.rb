@@ -6,5 +6,6 @@ module Queries
     field :fetchOffers, resolver: FetchOffersQuery
     field :fetchBookmakers, resolver: FetchBookmakersQuery
     field :fetchRanking, resolver: FetchRankingQuery
+    field :fetchValueAccumulations, resolver: FetchValueAccumulationsQuery
   end
 end
