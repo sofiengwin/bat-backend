@@ -4,6 +4,7 @@ class FetchTrendingTips < Service::Base
   Trend = Struct.new(:home_team_name, :away_team_name, :country, :league, :tip_count)
 
   def perform
+    today = Time.now
     trends = Match.find_by_sql(QUERY).map do |match|
       Trend.new(match.home_team_name, match.away_team_name, match.country, match.league, match.attributes['tip_count'])
     end
