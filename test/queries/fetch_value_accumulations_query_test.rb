@@ -24,7 +24,7 @@ class FetchValueAccumulationsQueryTest < ActionDispatch::IntegrationTest
 
       tips = create_list(:tip, rand(1...10), match: match, user: users.sample)
 
-      accumulation = create(:accumulation, user: users.sample)
+      accumulation = create(:accumulation, user: users.sample, approved_at: Time.now)
       accumulation.tips = tips
     end
 
@@ -35,9 +35,9 @@ class FetchValueAccumulationsQueryTest < ActionDispatch::IntegrationTest
         variables: {}
       }
     )
-    pp response.body
+
     with_response_data do |json|
-      assert_equal 3, json['fetchValueAccumulations'].count
+      assert_equal 4, json['fetchValueAccumulations'].count
     end
   end
 end
