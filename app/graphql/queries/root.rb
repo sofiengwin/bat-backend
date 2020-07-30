@@ -4,5 +4,6 @@ module Queries
 
     field :fetchTrending, resolver: FetchTrendingTipsQuery
     field :fetchOffers, resolver: FetchOffersQuery
+    field :fetchBookmakers, resolver: FetchBookmakersQuery
   end
 end
