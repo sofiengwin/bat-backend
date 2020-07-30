@@ -3,5 +3,6 @@ module Queries
     graphql_name 'Query'
 
     field :fetchTrending, resolver: FetchTrendingTipsQuery
+    field :fetchOffers, resolver: FetchOffersQuery
   end
 end

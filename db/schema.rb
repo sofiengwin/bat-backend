@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_130428) do
+ActiveRecord::Schema.define(version: 2020_07_30_004859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 2020_07_28_130428) do
     t.index ["user_id"], name: "index_accumulations_on_user_id"
   end
 
+  create_table "bookmakers", force: :cascade do |t|
+    t.string "link"
+    t.string "title"
+    t.string "description"
+    t.string "image_url"
+    t.string "subtitle"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "approved_at"
+  end
+
   create_table "matches", force: :cascade do |t|
     t.string "home_team_name"
     t.string "away_team_name"
@@ -43,6 +54,17 @@ ActiveRecord::Schema.define(version: 2020_07_28_130428) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["fixture_id"], name: "index_matches_on_fixture_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.string "link"
+    t.string "title"
+    t.string "description"
+    t.string "image_url"
+    t.string "subtitle"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "approved_at"
   end
 
   create_table "tips", force: :cascade do |t|
