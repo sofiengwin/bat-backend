@@ -1,11 +1,12 @@
 module Queries
   class BetGeneratorQuery < BaseResolver
-    argument :minOdd, ID, required: false
-    argument :maxOdd, ID, required: false
+    argument :minOdd, Int, required: false
+    argument :maxOdd, Int, required: false
+    argument :totalOdds, Int, required: false
 
     type Types::ViewAccumulationType, null: false
 
-    def resolve(accumulation:)
+    def resolve(**inputs)
       availableTips = Tip.where.not(id: accumulation.tips.map(&:id))
 
       {accumulation: accumulation, availableTips: availableTips}
