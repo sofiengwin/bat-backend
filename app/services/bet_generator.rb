@@ -12,13 +12,13 @@ class BetGenerator < Service::Base
   end
 
   def find_tips
-    Tip.where('tips.odd => ? OR tips.odds <= ?', min_odd, max_odd).limit(total_odd.floor)
+    Tip.where('tips.odd >= ? OR tips.odd <= ?', min_odd, max_odd).limit(total_odd.floor)
   end
 
   private def generated_tips
     current_total = 1
-    
-    find_tips.collect do |tip|
+
+    find_tips.select do |tip|
       current_total += tip.odd * current_total
       current_total <= total_odd
     end
