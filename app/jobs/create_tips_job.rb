@@ -1,7 +1,7 @@
 class CreateTipsJob < ApplicationJob
   def perform
     MongoClient.connection do |collection|
-      collection.find(normalisedAt: { '$type' => 9}).limit(1).each do |tip|
+      collection.find().each do |tip|
         create_tip_and_match(tip: tip)
       end
     end
@@ -9,7 +9,7 @@ class CreateTipsJob < ApplicationJob
 
   private def create_tip_and_match(tip:)
     user = User.first
-    match = Match.find_by_id(tip['fixtureId'])
+    match = Match.find_by_id(tip['fixtureId'] || rand(1...20))
 
     if match
       create_tip(tip: tip, match: match, user: user)
