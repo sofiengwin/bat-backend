@@ -18,6 +18,10 @@ class CreateUser < Service::Create
   end
 
   def perform
-    super(User)
+    if user = User.find_by_provider_id(provider_id)
+      Service::Result.resolve(user)
+    else
+      super(User)
+    end
   end
 end
