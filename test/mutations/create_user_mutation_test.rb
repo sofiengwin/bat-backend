@@ -2,11 +2,10 @@ require 'test_helper'
 
 class CreateUserMutationTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
-    mutation createUser($name: String, $username: String!, $email: String!, $accessToken: String, $tokenId: String, $providerId: String, $avatarUrl: String) {
-      createUser(input: {name: $name, username: $username, email: $email, accessToken: $accessToken tokenId: $tokenId, providerId: $providerId avatarUrl: $avatarUrl}) {
+    mutation createUser($name: String, $email: String!, $accessToken: String, $tokenId: String, $providerId: String, $avatarUrl: String) {
+      createUser(input: {name: $name, email: $email, accessToken: $accessToken tokenId: $tokenId, providerId: $providerId avatarUrl: $avatarUrl}) {
         user {
           name
-          username
           email
           avatarUrl
         }
@@ -26,7 +25,6 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
         query: QUERY,
         variables: {
           name: 'James Franco',
-          username: 'JamesFranco',
           email: 'james.franco@example.com',
           accessToken: 'fake.token',
           tokenId: 'fake.token.id',
@@ -40,7 +38,6 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
       'createUser' => {
         'user' => {
           'name' => 'James Franco',
-          'username' => 'JamesFranco',
           'email' => 'james.franco@example.com',
           'avatarUrl' => 'path.to.avatar.jpg',
         },
