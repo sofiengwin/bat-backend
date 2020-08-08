@@ -1,5 +1,10 @@
 module Mutations
   class CreateUserMutation < BaseMutation
+    class FindOrCreateType < Types::BaseObject
+      field :user, Types::UserType, null: false
+      field :hhh, String, null: false
+    end
+
     argument :name, String, required: false
     argument :email, String, required: true
     argument :accessToken, String, required: false
@@ -7,7 +12,7 @@ module Mutations
     argument :providerId, String, required: false
     argument :avatarUrl, String, required: false
 
-    field :user, Types::UserType, null: true
+    field :user, FindOrCreateType, null: true
     field :errors, [Types::ServiceErrorType], null: true
 
     def resolve(**inputs)
@@ -21,7 +26,7 @@ module Mutations
       )
 
       if result.succeeded?
-        { user: result.value }
+        { user: result.value , hhh: ActionToken.encode(result.value.id, scope: 'login')}
       else
         { errors: ServiceError.from(result.reason) }
       end

@@ -8,7 +8,6 @@ class CreateUser < Service::Create
 
   def initialize(name: nil, email:, access_token:, token_id:, provider_id:, avatar_url:)
     @name = name
-    @username = username
     @email = email
     @access_token = access_token
     @token_id = token_id
