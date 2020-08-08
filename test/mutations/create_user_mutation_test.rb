@@ -4,10 +4,12 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
     mutation createUser($name: String, $email: String!, $accessToken: String, $tokenId: String, $providerId: String, $avatarUrl: String) {
       createUser(input: {name: $name, email: $email, accessToken: $accessToken tokenId: $tokenId, providerId: $providerId avatarUrl: $avatarUrl}) {
-        user {
-          name
-          email
-          avatarUrl
+        userDetails {
+          user {
+            name
+            email
+            avatarUrl
+          }
         }
         errors {
           field
@@ -36,10 +38,12 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
 
     assert_json_data(
       'createUser' => {
-        'user' => {
-          'name' => 'James Franco',
-          'email' => 'james.franco@example.com',
-          'avatarUrl' => 'path.to.avatar.jpg',
+        'userDetails' => {
+          'user' => {
+            'name' => 'James Franco',
+            'email' => 'james.franco@example.com',
+            'avatarUrl' => 'path.to.avatar.jpg',
+          }
         },
         'errors' => nil
       }
@@ -54,7 +58,6 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
         query: QUERY,
         variables: {
           name: 'James Franco',
-          username: '',
           email: '',
           accessToken: 'fake.token',
           tokenId: 'fake.token.id',
@@ -66,9 +69,8 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
 
     assert_json_data(
       'createUser' => {
-        'user' => nil,
+        'userDetails' => nil,
         'errors' => [
-          { 'code' => 'blank', 'field' => 'username' },
           { 'code' => 'blank', 'field' => 'email' }
         ]
       }
