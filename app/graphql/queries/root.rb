@@ -8,5 +8,6 @@ module Queries
     field :fetchRanking, resolver: FetchRankingQuery
     field :fetchValueAccumulations, resolver: FetchValueAccumulationsQuery
     field :viewAccumulation, resolver: ViewAccumulationQuery
+    field :fetchTips, resolver: FetchTipsQuery
   end
 end
