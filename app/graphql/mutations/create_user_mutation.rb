@@ -12,7 +12,7 @@ module Mutations
     argument :providerId, String, required: false
     argument :avatarUrl, String, required: false
 
-    field :userDetails, FindOrCreateType, null: false
+    field :userDetails, FindOrCreateType, null: true
     field :errors, [Types::ServiceErrorType], null: true
 
     def resolve(**inputs)
