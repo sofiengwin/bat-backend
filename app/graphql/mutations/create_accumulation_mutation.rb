@@ -1,6 +1,5 @@
 module Mutations
   class CreateAccumulationMutation < BaseMutation
-    argument :userId, ID, required: true
     argument :tips, [ID], required: true
 
     field :accumulation, Types::AccumulationType, null: true
@@ -8,9 +7,9 @@ module Mutations
 
     def resolve(**inputs)
       return { errors: [ServiceError.new(:admin, 'notAuthorized')] } unless context[:current_user]
-  
+
       result = CreateAccumulation.perform(
-        user_id: inputs[:userId],
+        user_id: context[:current_user].id,
         tips: inputs[:tips],
       )
 

@@ -2,8 +2,8 @@ require 'test_helper'
 
 class CreateAccumulationMuationTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
-    mutation createAccumulation($tips: [ID!]!, $userId: ID!) {
-      createAccumulation(input: {tips: $tips, userId: $userId}) {
+    mutation createAccumulation($tips: [ID!]!) {
+      createAccumulation(input: {tips: $tips}) {
         accumulation {
           tips {
             match {
@@ -28,12 +28,11 @@ class CreateAccumulationMuationTest < ActionDispatch::IntegrationTest
       params: {
         query: QUERY,
         variables: {
-          userId: user.id,
           tips: tips.map(&:id)
         }.to_json
       }
     )
-
+    
     assert_json_data(
       'createAccumulation' => {
         'accumulation' => {

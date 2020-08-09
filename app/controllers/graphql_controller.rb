@@ -46,7 +46,7 @@ class GraphqlController < ApplicationController
   def current_user_id
     @variables = ensure_hash(params[:variables])
 
-    return unless @variables.has_key?('tips') && @variables.has_key?('userId')
+    return unless @variables.has_key?('tips')
     
     return if bearer_token && bearer_token.empty?
 
