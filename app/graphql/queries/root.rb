@@ -2,6 +2,7 @@ module Queries
   class Root < GraphQL::Schema::Object
     graphql_name 'Query'
 
+    field :me, resolver: MeQuery
     field :fetchTrending, resolver: FetchTrendingTipsQuery
     field :fetchOffers, resolver: FetchOffersQuery
     field :fetchBookmakers, resolver: FetchBookmakersQuery

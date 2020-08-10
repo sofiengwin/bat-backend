@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CreateAccumulationMuationTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
-    mutation createAccumulation($tips: [ID!]!) {
+    mutation createAccumulation ($tips: [ID!]!) {
       createAccumulation(input: {tips: $tips}) {
         accumulation {
           tips {
