@@ -4,6 +4,7 @@ module Types
     field :tips, [TipType], null: false
     field :rating, Integer, null: true
     field :userName, String, null: false
+    field :userId, String, null: false
     field :day, String, null: false
 
     def user_name
