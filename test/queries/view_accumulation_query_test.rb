@@ -5,6 +5,8 @@ class ViewAccumulationQueryTest < ActionDispatch::IntegrationTest
     query viewAccumulation($accumulationId: ID!) {
       viewAccumulation(accumulationId: $accumulationId) {
         accumulation {
+          userName
+          day
           tips {
             bet
           }
