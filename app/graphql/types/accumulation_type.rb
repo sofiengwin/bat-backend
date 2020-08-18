@@ -12,7 +12,7 @@ module Types
     end
 
     def day
-      object.created_at.strftime('%d %B')
+      object.created_at.strftime('%e %B')
     end
   end 
 end
