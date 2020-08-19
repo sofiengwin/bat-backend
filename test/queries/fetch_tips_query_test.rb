@@ -2,8 +2,8 @@ require 'test_helper'
 
 class FetchTipsQueryTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
-    query fetchTips {
-      fetchTips {
+    query fetchTips ($betType: String, $country: String, $maxOdd: Float, $minOdd: Float, $currentTips: [ID!]!) {
+      fetchTips (betType: $betType, country: $country, maxOdd: $maxOdd, minOdd: $minOdd, currentTips: $currentTips) {
         bet
         outcome
         match {
@@ -15,13 +15,15 @@ class FetchTipsQueryTest < ActionDispatch::IntegrationTest
   GQL
 
   test 'success' do
-    create(:tip, user: create(:user), match: create(:match))
+    create(:tip, user: create(:user), match: create(:match), approved_at: Time.now)
 
     post(
       graphql_path,
       params: {
         query: QUERY,
-        variables: {}
+        variables: {
+          currentTips: [1]
+        }
       }
     )
 

@@ -2,12 +2,11 @@ class FilterTips < Service::Base
   attr_reader :bet_type, :country, :max_odd, :min_odd, :current_tips
 
   def initialize(**options)
-    pp options
     @bet_type = options.fetch(:bet_type, nil)
     @country = options.fetch(:country, nil)
     @max_odd = options.fetch(:max_odd, 10)
     @min_odd = options.fetch(:min_odd, 0)
-    @current_tips = options.fetch(:current_tips, nil)
+    @current_tips = options.fetch(:current_tips, [])
   end
 
   def perform
@@ -49,7 +48,7 @@ class FilterTips < Service::Base
   end
 
   private def filter_already_in_accumulation(relation)
-    return relation unless current_tips
+    return relation if current_tips && current_tips.any?(&:blank?)
 
     relation.where.not(id: current_tips)
   end
