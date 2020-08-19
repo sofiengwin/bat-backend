@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_234630) do
+ActiveRecord::Schema.define(version: 2020_08_19_200850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2020_07_30_234630) do
     t.string "bet"
     t.decimal "odd", precision: 5, scale: 2
     t.string "mongo_id"
+    t.datetime "approved_at"
     t.index ["match_id"], name: "index_tips_on_match_id"
     t.index ["user_id"], name: "index_tips_on_user_id"
   end
