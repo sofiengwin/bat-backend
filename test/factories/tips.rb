@@ -6,5 +6,6 @@ FactoryBot.define do
     match { nil }
     bet { '1X'}
     outcome { 'pending' }
+    odd { 2.0 }
   end
 end
