@@ -46,9 +46,6 @@ class GraphqlController < ApplicationController
 
   def current_user_id
     @variables = ensure_hash(params[:variables])
-
-    # TODO; Find a better way for authentication only some queries/mutation
-    return unless require_authentication?
     
     return if bearer_token && bearer_token.empty?
 
@@ -70,11 +67,5 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
-  end
-
-  def require_authentication?
-    ['me', 'createAccumulation'].include?(params[:query].split("\n")[0].split(" ")[1])
-  rescue
-    false
   end
 end
