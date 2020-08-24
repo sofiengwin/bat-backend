@@ -1,20 +1,21 @@
 require 'test_helper'
 
 class BetGeneratorQueryTest < ActionDispatch::IntegrationTest
-  QUERY = `
+  QUERY = <<-GQL
     query betGenerator($minOdd: Float, $maxOdd: Float, $totalOdds: Float) {
       betGenerator(minOdd: $minOdd, maxOdd: $maxOdd, totalOdds: $totalOdds) {
-        tip {
-          id
-        }
+        id
+        odd
       }
     }
-  `
+  GQL
 
   test 'success' do
     user = create(:user)
     match = create(:match)
-    create_list(:tip, 6, odd: 1.5, user: user, match: match)
+    [1.12, 1.3, 1.25, 1.40, 1.6, 1.7, 1.20].each do |odd|
+      create(:tip, odd: odd, user: user, match: match)
+    end
 
     post(
       graphql_path,
@@ -23,13 +24,13 @@ class BetGeneratorQueryTest < ActionDispatch::IntegrationTest
         variables: {
           minOdd: 1.2,
           maxOdd: 1.7,
-          totalOdd: 4
-        }
+          totalOdds: 4.00
+        }.to_json
       }
     )
-    pp response.body
+
     with_response_data do |json|
-      pp json
+      assert_equal 4, json['betGenerator'].count
     end
   end
 end

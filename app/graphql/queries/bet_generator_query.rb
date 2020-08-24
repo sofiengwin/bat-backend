@@ -6,11 +6,11 @@ module Queries
 
     type [Types::TipType], null: false
 
-    def resolve(**inputs)
+    def resolve(**args)
       BetGenerator.perform(
         min_odd: args[:minOdd],
         max_odd: args[:maxOdd],
-        total_odd: args[:totalOdds],
+        total_odds: args[:totalOdds],
       ).value
     end
   end
