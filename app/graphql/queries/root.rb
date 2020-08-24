@@ -10,5 +10,6 @@ module Queries
     field :fetchValueAccumulations, resolver: FetchValueAccumulationsQuery
     field :viewAccumulation, resolver: ViewAccumulationQuery
     field :fetchTips, resolver: FetchTipsQuery
+    field :betGenerator, resolver: BetGeneratorQuery
   end
 end

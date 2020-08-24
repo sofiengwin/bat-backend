@@ -2,9 +2,9 @@ class BetGenerator < Service::Base
   attr_reader :min_odd, :max_odd, :total_odd
 
   def initialize(min_odd:, max_odd:, total_odd:)
-    @min_odd = min_odd
-    @max_odd = max_odd
-    @total_odd = total_odd
+    @min_odd = min_odd || 1.01
+    @max_odd = max_odd || 2
+    @total_odd = total_odd || 10
   end
 
   def perform

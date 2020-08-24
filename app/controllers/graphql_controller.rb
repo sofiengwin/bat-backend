@@ -46,8 +46,8 @@ class GraphqlController < ApplicationController
 
   def current_user_id
     @variables = ensure_hash(params[:variables])
-    
-    return if bearer_token && bearer_token.empty?
+    # binding.pry
+    return if bearer_token.blank?
 
     claim = ActionToken.decode(bearer_token, scope: 'login')
 
