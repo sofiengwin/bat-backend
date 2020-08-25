@@ -32,7 +32,7 @@ class FilterTips < Service::Base
   private def filter_by_min_odd(relation)
     return relation unless min_odd
 
-    relation.where('odd <= ?', min_odd)
+    relation.where('odd >= ?', min_odd)
   end
 
   private def filter_by_country(relation)
