@@ -53,7 +53,7 @@ class GraphqlController < ApplicationController
 
     claim['sub']
   rescue JWT::InvalidAudError, JWT::InvalidIssuerError, JWT::DecodeError, JWT::ExpiredSignature
-    render status: 401, json: { message: 'User not authorised' }
+    nil
   end
 
   def current_user
