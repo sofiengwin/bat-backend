@@ -2,16 +2,16 @@ require 'test_helper'
 
 class ViewAccumulationQueryTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
-    query viewAccumulation($accumulationId: ID!) {
-      viewAccumulation(accumulationId: $accumulationId) {
-        accumulation {
+    query profile($userId: ID!) {
+      profile(userId: $userId) {
+        id
+        name
+        accumulations {
+          id
           userName
-          day
-          tips {
-            bet
-          }
         }
-        availableTips {
+        tips {
+          id
           bet
         }
       }
@@ -25,21 +25,20 @@ class ViewAccumulationQueryTest < ActionDispatch::IntegrationTest
 
     accumulation = create(:accumulation, user: user, approved_at: Time.now)
     accumulation.tips = tips
-    create_list(:tip, 3, match: match, user: user)
 
     post(
       graphql_path,
       params: {
         query: QUERY,
         variables: {
-          accumulationId: accumulation.id,
+          userId: user.id,
         }
       }
     )
 
     with_response_data do |json|
-      assert_equal 3, json['viewAccumulation']['accumulation']['tips'].count
-      assert_equal 3, json['viewAccumulation']['availableTips'].count
+      assert_equal 1, json['profile']['accumulations'].count
+      assert_equal 3, json['profile']['tips'].count
     end
   end
 
@@ -49,7 +48,7 @@ class ViewAccumulationQueryTest < ActionDispatch::IntegrationTest
       params: {
         query: QUERY,
         variables: {
-          accumulationId: 43789490409,
+          userId: 8494040030,
         }
       }
     )

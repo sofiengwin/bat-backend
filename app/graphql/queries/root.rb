@@ -11,5 +11,6 @@ module Queries
     field :viewAccumulation, resolver: ViewAccumulationQuery
     field :fetchTips, resolver: FetchTipsQuery
     field :betGenerator, resolver: BetGeneratorQuery
+    field :profile, resolver: ProfileQuery
   end
 end

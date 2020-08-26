@@ -1,0 +1,16 @@
+module Queries
+  class ProfileQuery < BaseResolver
+    class ProfileType < Types::UserType
+      field :accumulations, [Types::AccumulationType], null: true
+      field :tips, [Types::TipType], null: true
+    end
+
+    argument :userId, ID, required: true, prepare: ->(id, _) { User.find_by_id(id) }, as: :user
+
+    type ProfileType, null: false
+
+    def resolve(user:)
+      user || context[:current_user] || GraphQL::ExecutionError.new("Something went wrong", extensions: { "user" => "notFound" })
+    end
+  end
+end
