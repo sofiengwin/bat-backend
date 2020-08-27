@@ -4,7 +4,7 @@ module Types
     field :link, String, null: false
     field :title, String, null: false
     field :description, String, null: false
-    field :image_url, String, null: false
-    field :subTitle, String, null: false
+    field :imageUrl, String, null: false
+    field :subtitle, String, null: false
   end 
 end
