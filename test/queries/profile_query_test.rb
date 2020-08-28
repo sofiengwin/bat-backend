@@ -6,6 +6,9 @@ class ViewAccumulationQueryTest < ActionDispatch::IntegrationTest
       profile(userId: $userId) {
         id
         name
+        totalTips
+        totalWins
+        totalPoints
         accumulations {
           id
           userName
