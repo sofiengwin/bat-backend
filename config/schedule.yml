@@ -1,0 +1,6 @@
+crawler_job:
+  cron: "0 6,9,10,12 * * *" # At 6, 8, 10, 12 oclock 
+  class: "CrawlerJob"
+normalizr_job:
+  cron: "30 6,9,10,12 * * *" #it will retrieve data every 1 minute
+  class: "NormalizrJob"
