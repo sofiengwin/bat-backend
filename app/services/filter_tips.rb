@@ -16,7 +16,7 @@ class FilterTips < Service::Base
   end
 
   private def approved_tips
-    Tip.where.not(approved_at: nil)
+    Tip.where.not(approved_at: nil).limit(20)
   end
 
   private def filter_by_odd(relation)
