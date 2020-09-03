@@ -1,15 +1,18 @@
 class CreateTipsJob < ApplicationJob
   def perform
     MongoClient.connection do |collection|
-      collection.find().each do |tip|
+      collection.find({
+        normalisedAt: { '$type' => 9},
+        consumedAt: { '$type' => 10}
+      }).each do |tip|
         create_tip_and_match(tip: tip)
       end
     end
   end
 
   private def create_tip_and_match(tip:)
-    user = User.first
-    match = Match.find_by_id(tip['fixtureId'] || rand(1...20))
+    user = tip_by_user(tip: tip)
+    match = Match.find_by_id(tip['fixtureId'])
 
     if match
       create_tip(tip: tip, match: match, user: user)
@@ -27,7 +30,7 @@ class CreateTipsJob < ApplicationJob
       fixture_id: tip['fixtureId'],
       start_at: tip['eventTimestamp'],
       league: tip['league'],
-      country: tip['country']
+      country: tip['country'],
     )
   end
 
@@ -39,11 +42,17 @@ class CreateTipsJob < ApplicationJob
       user: user,
       odd: tip['odd'],
       mongo_id: tip['_id'],
+      outcome: 'pending',
+      approved_at: Time.now
     )
   end
 
   # update mongo db that the tip has been consumed
   private def update_consumed_at(tip:)
     tip.update('consumedAt' => Time.now)
+  end
+
+  private def tip_by_user(tip:)
+    User.find_by_email("#{tip['provider']}@guru.com") || User.first
   end
 end

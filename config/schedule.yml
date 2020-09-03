@@ -4,3 +4,6 @@ crawler_job:
 normalizr_job:
   cron: "30 6,9,10,12 * * *" #it will retrieve data every 1 minute
   class: "NormalizrJob"
+create_tips_job:
+  cron: "45 6,9,10,12 * * *" 
+  class: "CreateTipsJob"
