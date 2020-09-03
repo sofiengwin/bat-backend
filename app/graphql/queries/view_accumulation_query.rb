@@ -7,7 +7,7 @@ module Queries
     def resolve(accumulation:)
       return GraphQL::ExecutionError.new("Something went wrong", extensions: { "accumulation" => "notFound" }) unless accumulation
   
-      availableTips = Tip.where.not(id: accumulation.tips.map(&:id))
+      availableTips = FilterTips.perform(current_tips: accumulation.tips.map(&:id)).value
 
       {accumulation: accumulation, availableTips: availableTips}
     end
