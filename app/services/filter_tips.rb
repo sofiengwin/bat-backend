@@ -10,7 +10,7 @@ class FilterTips < Service::Base
   end
 
   def perform
-    @tips = filter_already_in_accumulation(filter_by_country(filter_bet_type(filter_by_odd((approved_tips))))).limit(30).reverse_order
+    @tips = filter_already_in_accumulation(filter_by_country(filter_bet_type(filter_by_odd((approved_tips))))).limit(30)
     pp @tips.map(&:created_at)
     Service::Result.resolve(@tips)
   end
