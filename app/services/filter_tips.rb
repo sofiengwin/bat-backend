@@ -12,13 +12,11 @@ class FilterTips < Service::Base
   def perform
     @tips = filter_already_in_accumulation(filter_by_country(filter_bet_type(filter_by_odd((approved_tips))))).limit(30)
     pp @tips.map(&:created_at)
-    pp @tips.map(&:match).map(&:home_team_name)
-    pp @tips.map(&:match).map(&:away_team_name)
     Service::Result.resolve(@tips)
   end
 
   private def approved_tips
-    Tip.where.not(approved_at: nil).order('tips.created_at desc')
+    Tip.order(:approved_at).where.not(approved_at: nil)
   end
 
   private def filter_by_odd(relation)

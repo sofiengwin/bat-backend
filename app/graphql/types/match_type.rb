@@ -8,5 +8,3 @@ module Types
     field :country, String, null: false
   end 
 end
-
-Tip.update_all(odd: 1.55)
