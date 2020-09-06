@@ -6,8 +6,9 @@ class CreateTip < Service::Create
   field :mongo_id, presence: true
   field :odd
   field :outcome
+  field :approved_at
 
-  def initialize(rating: nil, bet:, match:, user:, odd: nil, mongo_id:, outcome: 'pending')
+  def initialize(rating: nil, bet:, match:, user:, odd: nil, mongo_id:, outcome: 'pending', approved_at: Time.now)
     @rating = rating
     @bet = bet
     @match = match
@@ -15,6 +16,7 @@ class CreateTip < Service::Create
     @odd = odd
     @mongo_id = mongo_id
     @outcome = outcome
+    @approved_at = approved_at
   end
 
   def perform

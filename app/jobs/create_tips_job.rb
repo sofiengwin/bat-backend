@@ -4,7 +4,7 @@ class CreateTipsJob < ApplicationJob
       collection.find({
         normalisedAt: { '$type' => 9},
         consumedAt: { '$type' => 10}
-      }).each do |tip|
+      }).limit(2).each do |tip|
         create_tip_and_match(tip: tip)
       end
     end
@@ -40,10 +40,9 @@ class CreateTipsJob < ApplicationJob
       bet: tip['bet'],
       match: match,
       user: user,
-      odd: tip['odd'],
+      odd: tip['odd'] || 1.50,
       mongo_id: tip['_id'],
       outcome: 'pending',
-      approved_at: Time.now
     )
   end
 
