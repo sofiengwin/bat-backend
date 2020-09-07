@@ -28,9 +28,10 @@ gem 'sentry-raven'
 gem 'pg'
 gem 'sidekiq'
 gem 'sprockets', '~> 3'
-gem 'rails_admin', '~> 2.0'
 gem 'mongo'
 gem "sidekiq-cron", "~> 1.1"
+gem 'activeadmin'
+gem 'devise'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'

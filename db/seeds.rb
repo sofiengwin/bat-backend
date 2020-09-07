@@ -52,7 +52,7 @@
 # end
 
 
-# # SELECT *, (SELECT COUNT(*) FROM tips WHERE tips.match_id  = m.id) AS tip_count FROM matches AS m ORDER BY tip_count DESC
+# SELECT *, (SELECT COUNT(*) FROM tips WHERE tips.match_id  = m.id) AS tip_count FROM matches AS m ORDER BY tip_count DESC
 
 mockUser = {
 	name: "Ogbara Godwin",
@@ -99,3 +99,5 @@ mockUser = {
 ].each do |provider|
   CreateUser.perform(**mockUser.merge(name: provider[:name], email: "#{provider[:provider]}@guru.com"), provider_id: rand(1...1000))
 end
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
