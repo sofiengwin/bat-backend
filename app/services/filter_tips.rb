@@ -16,7 +16,7 @@ class FilterTips < Service::Base
   end
 
   private def approved_tips
-    Tip.where.not(approved_at: nil).order('tips.approved_at desc')
+    Tip.approved.current
   end
 
   private def filter_by_odd(relation)

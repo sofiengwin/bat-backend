@@ -2,11 +2,13 @@ class CreateAccumulation < Service::Create
   attr_reader :tips
   field :user_id, presence: true
   field :rating
+  field :approved_at
 
-  def initialize(tips:, user_id:, rating: nil) 
+  def initialize(tips:, user_id:, rating: nil, approved_at: nil) 
     @tips = tips
     @user_id = user_id
     @rating = rating
+    @approved_at = approved_at
   end
 
   def perform

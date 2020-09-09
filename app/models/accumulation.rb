@@ -4,10 +4,13 @@ class Accumulation < ApplicationRecord
   has_many :tips, through: :accumulation_tips
 
   scope :won, -> { where(outcome: WON)}
+  scope :current, -> { where("DATE(created_at) = ?", Date.today) }
 
   OUTCOME = [
     PENDING = 'pending',
     WON = 'won',
     LOST = 'lost'
   ]
+
+  accepts_nested_attributes_for :tips
 end
