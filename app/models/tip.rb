@@ -11,4 +11,12 @@ class Tip < ApplicationRecord
     WON = 'won',
     LOST = 'lost'
   ]
+
+  def won?
+    outcome == 'won'
+  end
+
+  def lost?
+    outcome == 'lost'
+  end
 end
