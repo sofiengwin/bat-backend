@@ -12,6 +12,16 @@ class Tip < ApplicationRecord
     LOST = 'lost'
   ]
 
+  rails_admin do
+    update do 
+      field :outcome , :enum do
+        enum do
+          OUTCOME
+        end
+      end 
+    end
+  end
+
   def won?
     outcome == 'won'
   end
