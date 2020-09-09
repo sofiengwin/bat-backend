@@ -7,6 +7,9 @@ normalizr_job:
 create_tips_job:
   cron: "45 6,9,10,12 * * *" 
   class: "CreateTipsJob"
-create_tips_job:
+create_accumulation_job:
   cron: "55 6,9,10,12 * * *" 
-  class: "CreateTipsJob"
+  class: "CreateAccumulationJob"
+update_accumulation_job:
+  cron: "5 22 * * *" 
+  class: "UpdateAccumulationJob"
