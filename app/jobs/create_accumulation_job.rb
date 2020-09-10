@@ -10,7 +10,7 @@ class CreateAccumulationJob < ApplicationJob
   private def create_accumulation(user:)
     tips = user.tips.current
 
-    return if tips.count < 2 || user.accumulations.current.exist?
+    return if tips.count < 2 || user.accumulations.current.exists?
 
     CreateAccumulation.perform(tips: tips, user_id: user.id, approved_at: Time.now)
   end

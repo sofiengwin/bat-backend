@@ -4,7 +4,7 @@ class CreateTipsJob < ApplicationJob
       collection.find({
         normalisedAt: { '$type' => 9},
         consumedAt: { '$type' => 10}
-      }).limit(2).each do |tip|
+      }).each do |tip|
         create_tip_and_match(tip: tip)
       end
     end
