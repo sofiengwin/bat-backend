@@ -12,6 +12,6 @@ class CreateAccumulationJob < ApplicationJob
 
     return if tips.count < 2 || user.accumulations.current.exists?
 
-    CreateAccumulation.perform(tips: tips, user_id: user.id, approved_at: Time.now)
+    CreateAccumulation.perform(tips: tips.map(&:id), user_id: user.id, approved_at: Time.now)
   end
 end
