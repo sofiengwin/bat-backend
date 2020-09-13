@@ -11,6 +11,4 @@ class Accumulation < ApplicationRecord
     WON = 'won',
     LOST = 'lost'
   ]
-
-  accepts_nested_attributes_for :tips
 end
