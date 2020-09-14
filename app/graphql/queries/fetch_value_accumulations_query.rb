@@ -3,7 +3,7 @@ module Queries
     type [Types::AccumulationType], null: false
 
     def resolve
-      Accumulation.approved.current
+      Accumulation.where.not(approved_at: nil).current
     end
   end
 end
