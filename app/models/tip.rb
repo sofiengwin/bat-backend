@@ -17,6 +17,7 @@ class Tip < ApplicationRecord
       field :provider_name
       field :provider_email
       field :match_name
+      field :match_country_league
       field :outcome
       field :odd
       field :bet 
