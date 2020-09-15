@@ -49,4 +49,8 @@ class Tip < ApplicationRecord
   def match_name
     "#{match.home_team_name} vs #{match.away_team_name}"
   end
+
+  def match_country_league
+    "#{match.country} vs #{match.league}"
+  end
 end
