@@ -19,7 +19,6 @@ class Tip < ApplicationRecord
       field :match_name
       field :match_country_league
       field :outcome
-      field :odd
       field :bet 
     end
     update do 
@@ -52,6 +51,6 @@ class Tip < ApplicationRecord
   end
 
   def match_country_league
-    "#{match.country} vs #{match.league}"
+    "#{match.country} #{match.league}"
   end
 end
