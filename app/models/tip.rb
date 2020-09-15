@@ -14,8 +14,8 @@ class Tip < ApplicationRecord
 
   rails_admin do
     list do 
+      field :created_at
       field :provider_name
-      field :provider_email
       field :match_name
       field :match_country_league
       field :outcome
@@ -39,11 +39,7 @@ class Tip < ApplicationRecord
   end
 
   def provider_name
-    user.name
-  end
-
-  def provider_email
-    user.email
+    "#{user.name} #{user.email}"
   end
 
   def match_name
