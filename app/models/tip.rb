@@ -1,6 +1,7 @@
 class Tip < ApplicationRecord
   belongs_to :user
   belongs_to :match
+  has_many :accumulation_tips, dependent: :delete_all
 
   scope :won, -> { where(outcome: WON)}
   scope :approved, -> { where.not(approved_at: nil).order(approved_at: :desc) }
@@ -14,11 +15,11 @@ class Tip < ApplicationRecord
 
   rails_admin do
     list do 
-      field :created_at
       field :provider_name
       field :match_name
       field :match_country_league
       field :outcome
+      field :odd
       field :bet 
     end
     update do 
