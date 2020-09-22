@@ -40,7 +40,7 @@ class Tip < ApplicationRecord
   end
 
   def provider_name
-    "#{user.name} #{user.email}"
+    "#{created_at} #{user.email}"
   end
 
   def match_name
