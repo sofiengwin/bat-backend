@@ -1,4 +1,5 @@
 require 'mongo'
+Mongo::Logger.logger.level = ::Logger::FATAL
 
 class MongoClient
   def self.connection

@@ -1,3 +1,3 @@
 class Match < ApplicationRecord
-  has_many :tips
+  has_many :tips, dependent: :destroy
 end

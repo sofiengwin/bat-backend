@@ -3,7 +3,7 @@ class CreateTipsJob < ApplicationJob
     MongoClient.connection do |collection|
       collection.find({
         normalisedAt: { '$type' => 9},
-        consumedAt: { '$type' => 10}
+        consumedAt: { '$type' => 10},
       }).each do |tip|
         create_tip_and_match(tip: tip)
       end
@@ -12,14 +12,14 @@ class CreateTipsJob < ApplicationJob
 
   private def create_tip_and_match(tip:)
     user = tip_by_user(tip: tip)
-    match = Match.find_by_id(tip['fixtureId'])
+    match = Match.find_by_fixture_id(tip['fixtureId'])
 
     if match
       create_tip(tip: tip, match: match, user: user)
     else
       create_match(tip: tip)
         .then { |m| create_tip(tip: tip, match: m, user: user) }
-        .on_success { update_consumed_at(tip: tip) }
+        .on_success { update_consumed_at(tip: tip, collection: collection) }
     end
   end
 
@@ -47,11 +47,20 @@ class CreateTipsJob < ApplicationJob
   end
 
   # update mongo db that the tip has been consumed
-  private def update_consumed_at(tip:)
-    tip.update('consumedAt' => Time.now)
+  private def update_consumed_at(tip:, collection:)
+    collection.update_one(
+      { '_id' => BSON::ObjectId(tip['_id']) },
+      {
+        '$set' => { "consumedAt" => Time.now },
+      }
+    )
   end
 
   private def tip_by_user(tip:)
     User.find_by_email("#{tip['provider']}@guru.com") || User.first
   end
 end
+
+# collection.find('_id' => BSON::ObjectId('5f4e1bc584fae40024b70ecb')).each { |d| puts d }
+# collection.find('_id' => tip['_id']).each { |d| puts d }
+# match = Match.where(fixture_id: 566467).count
