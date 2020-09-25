@@ -2,8 +2,9 @@ class CreateTipsJob < ApplicationJob
   def perform
     MongoClient.connection do |collection|
       collection.find({
-        normalisedAt: { '$type' => 9},
-        consumedAt: { '$type' => 10},
+        normalisedAt: { '$type' => 9 },
+        consumedAt: { '$type' => 10 },
+        eventTimestamp: { $gte: Time.now.beginning_of_day },
       }).each do |tip|
         create_tip_and_match(tip: tip)
       end
@@ -63,4 +64,11 @@ end
 
 # collection.find('_id' => BSON::ObjectId('5f4e1bc584fae40024b70ecb')).each { |d| puts d }
 # collection.find('_id' => tip['_id']).each { |d| puts d }
+
+Match.find_each do |match|
+  if Match.where(fixture_id: match.fixture_id).where.not(id: match.id).exists?
+    Match.where(fixture_id: match.fixture_id).where.not(id: match.id).destroy_all
+  end
+end
+
 # match = Match.where(fixture_id: 566467).count
