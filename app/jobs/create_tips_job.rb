@@ -4,7 +4,7 @@ class CreateTipsJob < ApplicationJob
       collection.find({
         normalisedAt: { '$type' => 9 },
         consumedAt: { '$type' => 10 },
-        eventTimestamp: { $gte: Time.now.beginning_of_day },
+        eventTimestamp: { '$gte' => Time.now.beginning_of_day },
       }).each do |tip|
         create_tip_and_match(tip: tip, collection: collection)
       end
