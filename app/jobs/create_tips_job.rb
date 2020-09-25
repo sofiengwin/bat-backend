@@ -6,12 +6,12 @@ class CreateTipsJob < ApplicationJob
         consumedAt: { '$type' => 10 },
         eventTimestamp: { $gte: Time.now.beginning_of_day },
       }).each do |tip|
-        create_tip_and_match(tip: tip)
+        create_tip_and_match(tip: tip, collection: collection)
       end
     end
   end
 
-  private def create_tip_and_match(tip:)
+  private def create_tip_and_match(tip:, collection:)
     user = tip_by_user(tip: tip)
     match = Match.find_by_fixture_id(tip['fixtureId'])
 
