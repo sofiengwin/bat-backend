@@ -4,11 +4,11 @@ class User < ApplicationRecord
   has_many :points
 
   def total_tips
-    tips.count + accumulations.count
+    accumulations.count
   end
 
   def total_wins
-    tips.won.count + accumulations.won.count
+    accumulations.won.count
   end
 
   def total_points
