@@ -6,6 +6,10 @@ module Queries
       field :totalTips, Int, null: true
       field :totalWins, Int, null: true
       field :totalPoints, Int, null: true
+
+      def accumulations
+        object.accumulations.order(created_at: :desc)
+      end
     end
 
     argument :userId, ID, required: true, prepare: ->(id, _) { User.find_by_id(id) }, as: :user
