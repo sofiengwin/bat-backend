@@ -2,6 +2,7 @@ class Tip < ApplicationRecord
   belongs_to :user
   belongs_to :match
   has_many :accumulation_tips, dependent: :delete_all
+  has_one :point, as: :pointable
 
   scope :won, -> { where(outcome: WON)}
   scope :approved, -> { where.not(approved_at: nil).order(approved_at: :desc) }

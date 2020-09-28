@@ -1,7 +1,6 @@
 class UpdateAccumulationJob < ApplicationJob
   def perform
     providers = User.where.not(approved_provider_at: nil)
-
     providers.each do |provider|
       update_accumulations_for_user(user: provider)
     end
@@ -16,6 +15,7 @@ class UpdateAccumulationJob < ApplicationJob
   private def update_accumulation(accumulation:)
     if accumulation.tips.all?(&:won?)
       accumulation.update(outcome: 'won')
+      Point.create!(pointable: accumulation, value: accumulation.tips.map(&:odd).reduce(:*), user: accumulation.user)
     elsif accumulation.tips.any?(&:lost?)
       accumulation.update(outcome: 'lost')
     end

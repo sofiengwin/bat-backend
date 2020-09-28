@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_222743) do
+ActiveRecord::Schema.define(version: 2020_09_28_225027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,11 +98,12 @@ ActiveRecord::Schema.define(version: 2020_09_09_222743) do
 
   create_table "points", force: :cascade do |t|
     t.integer "value"
-    t.bigint "tip_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["tip_id"], name: "index_points_on_tip_id"
+    t.string "pointable_type", null: false
+    t.bigint "pointable_id", null: false
+    t.index ["pointable_type", "pointable_id"], name: "index_points_on_pointable_type_and_pointable_id"
     t.index ["user_id"], name: "index_points_on_user_id"
   end
 
@@ -138,7 +139,6 @@ ActiveRecord::Schema.define(version: 2020_09_09_222743) do
   add_foreign_key "accumulation_tips", "accumulations"
   add_foreign_key "accumulation_tips", "tips"
   add_foreign_key "accumulations", "users"
-  add_foreign_key "points", "tips"
   add_foreign_key "points", "users"
   add_foreign_key "tips", "matches"
   add_foreign_key "tips", "users"
