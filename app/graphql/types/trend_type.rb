@@ -4,6 +4,7 @@ module Types
     field :awayTeamName, String, null: false
     field :league, String, null: false
     field :country, String, null: false
-    field :tipCount, Integer, null: false 
+    field :tipCount, Integer, null: false
+    field :matchId, Integer, null: false
   end 
 end

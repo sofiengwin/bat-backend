@@ -5,7 +5,7 @@ class Tip < ApplicationRecord
   has_one :point, as: :pointable
 
   scope :won, -> { where(outcome: WON)}
-  scope :approved, -> { where.not(approved_at: nil).order(approved_at: :desc) }
+  scope :approved, -> { where.not(approved_at: nil) }
   scope :current, -> { where("DATE(created_at) = ?", Time.zone.today) }
 
   OUTCOME = [

@@ -8,7 +8,7 @@ class FetchTrendingTipsTest < ActiveSupport::TestCase
       match = create(:match)
     
       rand(1...10).times do
-        create(:tip, match: match, user: user)
+        create(:tip, match: match, user: user, approved_at: Time.current)
       end
     end
 
