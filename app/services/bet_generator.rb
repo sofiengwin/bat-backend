@@ -12,7 +12,10 @@ class BetGenerator < Service::Base
   end
 
   def find_tips
-    Tip.where('tips.odd >= ? AND tips.odd <= ?', min_odd, max_odd).order(:odd)
+    FilterTips.perform(
+      max_odd: max_odd,
+      min_odd: min_odd
+    ).value.reorder(:odd)
   end
 
   private def generated_tips

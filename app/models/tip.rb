@@ -6,7 +6,7 @@ class Tip < ApplicationRecord
 
   scope :won, -> { where(outcome: WON)}
   scope :approved, -> { where.not(approved_at: nil).order(approved_at: :desc) }
-  scope :current, -> { where("DATE(created_at) = ?", Date.today) }
+  scope :current, -> { where("DATE(created_at) = ?", Time.zone.today) }
 
   OUTCOME = [
     PENDING = 'pending',

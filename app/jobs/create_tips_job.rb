@@ -65,10 +65,10 @@ end
 # collection.find('_id' => BSON::ObjectId('5f4e1bc584fae40024b70ecb')).each { |d| puts d }
 # collection.find('_id' => tip['_id']).each { |d| puts d }
 
-Match.find_each do |match|
-  if Match.where(fixture_id: match.fixture_id).where.not(id: match.id).exists?
-    Match.where(fixture_id: match.fixture_id).where.not(id: match.id).destroy_all
-  end
-end
+# Match.find_each do |match|
+#   if Match.where(fixture_id: match.fixture_id).where.not(id: match.id).exists?
+#     Match.where(fixture_id: match.fixture_id).where.not(id: match.id).destroy_all
+#   end
+# end
 
 # match = Match.where(fixture_id: 566467).count

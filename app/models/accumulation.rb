@@ -5,7 +5,7 @@ class Accumulation < ApplicationRecord
   has_one :point, as: :pointable
 
   scope :won, -> { where(outcome: WON)}
-  scope :current, -> { where("DATE(created_at) = ?", Date.today) }
+  scope :current, -> { where("DATE(created_at) = ?", Time.zone.today) }
 
   OUTCOME = [
     PENDING = 'pending',
