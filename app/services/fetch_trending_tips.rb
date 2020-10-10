@@ -7,8 +7,8 @@ class FetchTrendingTips < Service::Base
     today = Time.now
     
     match_id_and_tips_count = Tip.approved.current.group(:match_id).count(:id)
-    matches = Match.find(match_id_and_tips_count.keys)
-    # binding.pry
+    matches = Match.where(id: match_id_and_tips_count.keys).limit(10)
+
     trends = matches.map do |match|
       Trend.new(match.home_team_name, match.away_team_name, match.country, match.league, match_id_and_tips_count[match.id], match.id)
     end
