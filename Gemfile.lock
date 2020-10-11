@@ -98,6 +98,9 @@ GEM
       railties
       sprockets-rails
     graphql (1.10.10)
+    graphql-batch (0.4.3)
+      graphql (>= 1.3, < 2)
+      promise.rb (~> 0.7.2)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
@@ -269,6 +272,7 @@ DEPENDENCIES
   factory_bot_rails
   graphiql-rails
   graphql
+  graphql-batch
   jwt
   listen (~> 3.2)
   mongo
