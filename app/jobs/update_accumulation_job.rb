@@ -1,6 +1,6 @@
 class UpdateAccumulationJob < ApplicationJob
   def perform
-    providers = User.where.not(approved_provider_at: nil)
+    providers = User.all
     providers.each do |provider|
       update_accumulations_for_user(user: provider)
     end
