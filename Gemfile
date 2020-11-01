@@ -31,6 +31,7 @@ gem 'sprockets', '~> 3'
 gem 'mongo'
 gem "sidekiq-cron", "~> 1.1"
 gem 'rails_admin', '~> 2.0'
+gem 'dogstatsd-ruby'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
