@@ -8,7 +8,7 @@ class CreateAccumulationJob < ApplicationJob
   end
 
   private def create_accumulation(user:)
-    tips = user.tips.current.order(odd: :asc)
+    tips = user.tips.current.order(odd: :asc).limit(3)
 
     return if tips.count < 2 || user.accumulations.current.exists?
 
