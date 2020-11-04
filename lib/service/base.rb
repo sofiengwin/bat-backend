@@ -10,7 +10,7 @@ module Service
 
     def self.perform(*args, **params)
       klass = params.any? ? new(*args, **params) : new(*args)
-      klass.perform
+      klass.instrument
     end
 
     def self.fields
@@ -25,6 +25,14 @@ module Service
         validates name, validations.merge(unless: -> { send(name).eql?(NOT_SET) })
       elsif validations.any?
         validates name, validations
+      end
+    end
+
+    def instrument
+      name = self.class.name.underscore
+
+      STATSD.time('service.perform', tags: ["environment:#{Rails.env}", "service:#{name}"]) do
+        perform
       end
     end
 
