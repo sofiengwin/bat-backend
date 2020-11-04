@@ -24,8 +24,9 @@ class ViewAccumulationQueryTest < ActionDispatch::IntegrationTest
     tips = create_list(:tip, 3, match: match, user: user)
 
     accumulation = create(:accumulation, user: user, approved_at: Time.now)
+
     accumulation.tips = tips
-    create_list(:tip, 3, match: match, user: user)
+    create_list(:tip, 3, match: match, user: user, approved_at: Time.now)
 
     post(
       graphql_path,

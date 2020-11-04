@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FetchOffersQueryTest < ActionDispatch::IntegrationTest
+class FetchBookmakersQueryTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
     query fetchBookmakers {
       fetchBookmakers {

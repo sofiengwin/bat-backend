@@ -13,6 +13,10 @@ class CreateAccumulationMuationTest < ActionDispatch::IntegrationTest
             bet
           }
         }
+        errors {
+          field
+          code
+        }
       }
     }
   GQL
@@ -41,7 +45,8 @@ class CreateAccumulationMuationTest < ActionDispatch::IntegrationTest
             {'match' => {'homeTeamName' => 'MyString', 'awayTeamName' => 'MyString'}, 'bet' => '1X'},
             {'match' => {'homeTeamName' => 'MyString', 'awayTeamName' => 'MyString'}, 'bet' => '1X'},
           ]
-        }
+        },
+        'errors' => nil,
       }
     )
   end
@@ -63,6 +68,14 @@ class CreateAccumulationMuationTest < ActionDispatch::IntegrationTest
       }
     )
 
-    assert_equal 'User not authorised', JSON.parse(response.body)['message']
+    assert_json_data(
+      'createAccumulation' => {
+        'accumulation' => nil,
+        'errors' => [{
+          'field' => 'admin',
+          'code' => 'notAuthorized',
+        }]
+      }
+    )
   end
 end

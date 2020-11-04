@@ -9,10 +9,10 @@ class UserTest < ActiveSupport::TestCase
       create_list(:accumulation, 5, user: user, outcome: outcome)
     end
 
-    create_list(:point, 10, user: user, tip: Tip.last, value: 10)
+    create_list(:point, 10, user: user, pointable: Tip.last, value: 10)
 
-    assert_equal 20, user.total_tips
-    assert_equal 10, user.total_wins
+    assert_equal 10, user.total_tips
+    assert_equal 5, user.total_wins
     assert_equal 100, user.total_points
   end
 end

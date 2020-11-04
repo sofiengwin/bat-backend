@@ -37,6 +37,6 @@ class MeQueryTest < ActionDispatch::IntegrationTest
       }
     )
 
-    assert_equal 'User not authorised', JSON.parse(response.body)['message']
+    assert_equal 'User not authorised', JSON.parse(response.body)['errors'][0]['message']
   end
 end

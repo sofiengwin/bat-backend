@@ -14,7 +14,7 @@ class BetGeneratorQueryTest < ActionDispatch::IntegrationTest
     user = create(:user)
     match = create(:match)
     [1.12, 1.3, 1.25, 1.40, 1.6, 1.7, 1.20].each do |odd|
-      create(:tip, odd: odd, user: user, match: match)
+      create(:tip, odd: odd, user: user, match: match, approved_at: Time.now)
     end
 
     post(

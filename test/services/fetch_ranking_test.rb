@@ -14,7 +14,8 @@ class FetchRankingTest <ActiveSupport::TestCase
       rand(1...10).times do
         user = users.sample
         tip = create(:tip, match: match, user: user)
-        create(:point, tip: tip, user: user, value: 10)
+        
+        create(:point, pointable: tip, user: user, value: 10)
       end
     end
 

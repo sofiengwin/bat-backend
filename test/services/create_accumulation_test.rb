@@ -3,7 +3,8 @@ require 'test_helper'
 class CreateAccumulationTest < ActiveSupport::TestCase
   test 'success' do
     user = create(:user)
-    result = CreateAccumulation.perform(tips: [1, 3, 4], user_id: user.id, rating: 80)
+    tips_id = create_list(:tip, 3, user: user, match: create(:match)).map(&:id)
+    result = CreateAccumulation.perform(tips: tips_id, user_id: user.id, rating: 80)
 
     assert result.succeeded?
     assert result.value.tips

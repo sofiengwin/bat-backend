@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ViewAccumulationQueryTest < ActionDispatch::IntegrationTest
+class ProfileQueryTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
     query profile($userId: ID!) {
       profile(userId: $userId) {
