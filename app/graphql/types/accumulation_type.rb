@@ -1,7 +1,7 @@
 module Types
   class AccumulationType < BaseObject
     field :id, ID, null: true
-    field :tips, [TipType], null: false
+    association :tips, [TipType], null: false
     field :rating, Integer, null: true
     field :userName, String, null: false
     field :userId, String, null: false

@@ -1,14 +1,20 @@
 module Queries
   class ProfileQuery < BaseResolver
     class ProfileType < Types::UserType
-      field :accumulations, [Types::AccumulationType], null: true
+      field :accumulations, [Types::AccumulationType], Accumulation, null: true
       field :tips, [Types::TipType], null: true
       field :totalTips, Int, null: true
       field :totalWins, Int, null: true
       field :totalPoints, Int, null: true
 
       def accumulations
-        object.accumulations.order(created_at: :desc)
+        AssociationLoader.for(User, :accumulations).load(object)
+          .then { |result| result.sort }
+      end
+
+      def tips
+        AssociationLoader.for(User, :tips).load(object)
+          .then { |result| result.sort }
       end
     end
 

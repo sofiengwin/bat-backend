@@ -27,8 +27,8 @@ class FetchTipsQueryTest < ActionDispatch::IntegrationTest
       }
     )
 
+    pp response.body
     with_response_data do |json|
-      pp json
       assert_equal 1, json['fetchTips'].count
     end
   end

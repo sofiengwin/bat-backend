@@ -4,7 +4,7 @@ module Types
     field :rating, String, null: true
     field :outcome, OutcomeType, null: false
     field :bet, String, null: false
-    field :match, MatchType, null: false
+    association :match, MatchType, null: false
     field :odd, Float, null: false
 
     def outcome
