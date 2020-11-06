@@ -79,4 +79,18 @@ class FilterTipsTest < ActiveSupport::TestCase
 
     assert_equal 4, result.value.count
   end
+
+  test 'filter by match_id' do
+    user = create(:user)
+    m1 = create(:match)
+    m2 = create(:match)
+
+    [m1, m2].each do |match|
+      create_list(:tip, 3, match: match, user: user, approved_at: Time.now)
+    end
+
+    result = FilterTips.perform(match_id: m1.id)
+
+    assert_equal 3, result.value.count
+  end
 end

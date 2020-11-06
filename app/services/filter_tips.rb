@@ -1,5 +1,5 @@
 class FilterTips < Service::Base
-  attr_reader :bet_type, :country, :max_odd, :min_odd, :current_tips
+  attr_reader :bet_type, :country, :max_odd, :min_odd, :current_tips, :match_id
 
   def initialize(**options)
     @bet_type = options.fetch(:bet_type, nil)
@@ -7,10 +7,15 @@ class FilterTips < Service::Base
     @max_odd = options.fetch(:max_odd, 10)
     @min_odd = options.fetch(:min_odd, 0)
     @current_tips = options.fetch(:current_tips, [])
+    @match_id = options[:match_id]
   end
 
   def perform
-    @tips = filter_already_in_accumulation(filter_by_country(filter_bet_type(filter_by_odd((approved_tips))))).limit(30)
+    @tips = if match_id
+              filter_by_match_id(approved_tips)
+            else
+              filter_already_in_accumulation(filter_by_country(filter_bet_type(filter_by_odd((approved_tips))))).limit(30)
+            end
 
     Service::Result.resolve(@tips)
   end
@@ -51,5 +56,9 @@ class FilterTips < Service::Base
     return relation if current_tips && current_tips.any?(&:blank?)
 
     relation.where.not(id: current_tips)
+  end
+
+  private def filter_by_match_id(relation)
+    relation.where(match_id: match_id)
   end
 end
