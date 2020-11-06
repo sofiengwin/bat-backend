@@ -16,7 +16,7 @@ module Queries
         min_odd: args[:minOdd],
         bet_type: args[:betType],
         country: args[:country],
-        current_tips: args[:currentTips]
+        current_tips: args[:currentTips],
         match_id: args[:matchId]
       ).value
     end
