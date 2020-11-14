@@ -3,12 +3,12 @@ class CreateTip < Service::Create
   field :bet, presence: true
   field :match, presence: true
   field :user, presence: true
-  field :mongo_id, presence: true
+  field :mongo_id
   field :odd
   field :outcome
   field :approved_at
 
-  def initialize(rating: nil, bet:, match:, user:, odd: nil, mongo_id:, outcome: 'pending', approved_at: Time.now)
+  def initialize(rating: nil, bet:, match:, user:, odd: nil, mongo_id: nil, outcome: 'pending', approved_at: Time.now)
     @rating = rating
     @bet = bet
     @match = match

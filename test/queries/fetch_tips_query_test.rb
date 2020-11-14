@@ -2,8 +2,8 @@ require 'test_helper'
 
 class FetchTipsQueryTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
-    query fetchTips ($betType: String, $country: String, $maxOdd: Float, $minOdd: Float, $currentTips: [ID!]!) {
-      fetchTips (betType: $betType, country: $country, maxOdd: $maxOdd, minOdd: $minOdd, currentTips: $currentTips) {
+    query fetchTips ($betType: String, $country: String, $maxOdd: Float, $minOdd: Float, $currentTips: [ID!]!, $matchId: ID) {
+      fetchTips (betType: $betType, country: $country, maxOdd: $maxOdd, minOdd: $minOdd, currentTips: $currentTips, matchId: $matchId) {
         bet
         outcome
         match {
@@ -22,7 +22,7 @@ class FetchTipsQueryTest < ActionDispatch::IntegrationTest
       params: {
         query: QUERY,
         variables: {
-          currentTips: [1]
+          currentTips: [1],
         }
       }
     )

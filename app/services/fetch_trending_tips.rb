@@ -2,7 +2,7 @@ class FetchTrendingTips < Service::Base
   Trend = Struct.new(:home_team_name, :away_team_name, :country, :league, :tip_count, :match_id)
 
   def perform
-    match_id_and_tips_count = Tip.approved.current.group(:match_id).count(:id)
+    match_id_and_tips_count = Tip.approved.group(:match_id).count(:id)
     matches = Match.where(id: match_id_and_tips_count.keys).limit(10)
 
     trends = matches.map do |match|

@@ -7,7 +7,6 @@ module Queries
     argument :currentTips, [ID], required: false
     argument :matchId, ID, required: false
 
-
     type [Types::TipType], null: false
 
     def resolve(**args)
