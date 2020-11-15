@@ -13,7 +13,6 @@ class CreateUserTip < Service::Base
 	validate :only_three_games_per_day?
 
 	def initialize(**options)
-		pp options
 		@home_team_name = options[:home_team_name]
 		@away_team_name = options[:away_team_name]
 		@fixture_id = options[:fixture_id]
