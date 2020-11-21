@@ -42,7 +42,7 @@ class CreateUserTip < Service::Base
       bet: bet,
       match: match,
       user: user,
-      odd: odd || 1.50,
+      odd: odd || 1.55,
 		)
 	end
 
