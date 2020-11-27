@@ -13,17 +13,18 @@ module Mutations
     field :errors, [Types::ServiceErrorType], null: true
 
     def resolve(**args)
-      return { errors: [ServiceError.new(:admin, 'notAuthorized')] } unless context[:current_user]
+      return { errors: [ServiceError.new(:user, 'notAuthorized')] } unless context[:current_user]
+
       result = CreateUserTip.perform(
         home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
-        home_team_name: args[:homeTeamName],
+        away_team_name: args[:awayTeamName],
+        fixture_id: args[:fixtureId],
+        league: args[:league],
+        country: args[:country],
+        bet: args[:bet],
+        odd: args[:odd],
+        start_at: args[:startAt],
+        user: context[:current_user],
       )
 
       if result.succeeded?
