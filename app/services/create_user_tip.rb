@@ -53,7 +53,7 @@ class CreateUserTip < Service::Base
       fixture_id: fixture_id,
       start_at: start_at,
       league: league,
-      country: country,
+      country: country
 		)
 	end
 	
