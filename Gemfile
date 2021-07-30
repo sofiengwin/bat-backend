@@ -25,6 +25,8 @@ gem 'graphql'
 gem 'jwt'
 gem 'webmock'
 gem 'sentry-ruby'
+gem "sentry-rails"
+gem "sentry-sidekiq"
 gem 'pg'
 gem 'sidekiq'
 gem 'sprockets', '~> 3'
