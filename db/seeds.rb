@@ -55,8 +55,8 @@
 # SELECT *, (SELECT COUNT(*) FROM tips WHERE tips.match_id  = m.id) AS tip_count FROM matches AS m ORDER BY tip_count DESC
 
 mockUser = {
-	name: "Ogbara Godwin",
-	email: "sengodwin@gmail.com",
+	name: "King Tiper",
+	email: "king.tipper@gmail.com",
 	access_token: "fake.access.token",
 	token_id: "fake.token.id",
 	provider_id: "f",
