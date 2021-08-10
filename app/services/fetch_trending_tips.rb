@@ -1,5 +1,5 @@
 class FetchTrendingTips < Service::Base
-  Trend = Struct.new(:home_team_name, :away_team_name, :country, :league, :tip_count, :match_id)
+  Trend = Struct.new(:homeTeamName, :awayTeamName, :country, :league, :tipCount, :matchId)
 
   def perform
     match_id_and_tips_count = Tip.approved.group(:match_id).count(:id)
@@ -10,7 +10,7 @@ class FetchTrendingTips < Service::Base
     end
  
     Service::Result.resolve(
-      trends.sort{ |a, b| b.tip_count <=> a.tip_count }
+      trends.sort{ |a, b| b.tipCount <=> a.tipCount }
     )
   end
 end

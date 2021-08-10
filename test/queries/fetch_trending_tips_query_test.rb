@@ -29,7 +29,7 @@ class FetchTrendingTipsQueryTest < ActionDispatch::IntegrationTest
         variables: {}
       }
     )
-
+  
     with_response_data do |json|
       assert_equal 4, json['fetchTrending'].count
     end
