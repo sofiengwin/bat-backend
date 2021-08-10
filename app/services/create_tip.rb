@@ -3,7 +3,7 @@ class CreateTip < Service::Create
   field :bet, presence: true
   field :match, presence: true
   field :user, presence: true
-  field :mongo_id
+  field :mongo_id, presence: true
   field :odd
   field :outcome
   field :approved_at

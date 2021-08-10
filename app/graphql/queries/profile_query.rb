@@ -3,9 +3,9 @@ module Queries
     class ProfileType < Types::UserType
       field :accumulations, [Types::AccumulationType], Accumulation, null: true
       field :tips, [Types::TipType], null: true
-      field :totalTips, Int, null: true
-      field :totalWins, Int, null: true
-      field :totalPoints, Int, null: true
+      field :totalTips, Int, null: true, method: :total_tips
+      field :totalWins, Int, null: true, method: :total_wins
+      field :totalPoints, Int, null: true, method: :total_points
 
       def accumulations
         AssociationLoader.for(User, :accumulations).load(object)

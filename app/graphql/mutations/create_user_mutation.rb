@@ -26,7 +26,7 @@ module Mutations
       )
 
       if result.succeeded?
-        { user_details: {user: result.value, accessToken: ActionToken.encode(result.value.id, scope: 'login')} }
+        { userDetails: {user: result.value, accessToken: ActionToken.encode(result.value.id, scope: 'login')} }
       else
         { errors: ServiceError.from(result.reason) }
       end

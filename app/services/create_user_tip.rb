@@ -8,6 +8,7 @@ class CreateUserTip < Service::Base
 	field :user
 	field :odd
 	field :start_at
+	field :mongo_id
 
 	validate :more_than_three_hours_to_match?
 	validate :only_three_games_per_day?
@@ -22,6 +23,7 @@ class CreateUserTip < Service::Base
 		@user = options[:user]
 		@odd = options[:odd] || 1.55
 		@start_at = options[:start_at]
+		@mongo_id = options[:mongo_id]
 	end
 
 	def perform
@@ -43,6 +45,7 @@ class CreateUserTip < Service::Base
       match: match,
       user: user,
       odd: odd || 1.55,
+			mongo_id: mongo_id,
 		)
 	end
 

@@ -4,6 +4,6 @@ module Types
     field :name, String, null: false
     field :email, String, null: false
     field :username, String, null: false
-    field :avatarUrl, String, null: true
+    field :avatarUrl, String, null: true, method: :avatar_url
   end 
 end

@@ -7,7 +7,7 @@ module Types
     field :userId, String, null: false
     field :day, String, null: false
 
-    def user_name
+    def userName
       object.user.name
     end
 

@@ -11,13 +11,14 @@ class CreateUserTipTest < ActiveSupport::TestCase
       bet: '1',
       user: create(:user),
       odd: 1.55,
-      start_at: 4.hours.ago.to_i
+      start_at: 4.hours.ago.to_i,
+      mongo_id: 'rand(10)'
     }
   end
 
   test 'success' do
     result = CreateUserTip.perform(args)
-    pp result
+    
     assert result.succeeded?
     assert result.value
     assert result.value.match

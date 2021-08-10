@@ -17,11 +17,8 @@ class CreateTipTest < ActiveSupport::TestCase
   end
 
   test 'failure' do
-    match = create(:match)
-    user = create(:user)
-
     result = CreateTip.perform(rating: 80, bet: '', match: nil, user: nil, mongo_id: nil)
-
+    pp result
     assert result.failed?
     assert_errors [:blank], result.reason.details[:bet]
     assert_errors [:blank], result.reason.details[:user]
