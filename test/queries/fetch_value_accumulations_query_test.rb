@@ -5,6 +5,8 @@ class FetchValueAccumulationsQueryTest < ActionDispatch::IntegrationTest
     query fetchValueAccumulations {
       fetchValueAccumulations {
         rating
+        userName
+        userId
         tips {
           bet
         }

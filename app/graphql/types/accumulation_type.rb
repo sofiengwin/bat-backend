@@ -11,6 +11,10 @@ module Types
       object.user.name
     end
 
+    def userId
+      object.user.id
+    end
+
     def day
       object.created_at.strftime('%e %B')
     end
