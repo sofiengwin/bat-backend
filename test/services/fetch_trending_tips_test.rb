@@ -17,6 +17,7 @@ class FetchTrendingTipsTest < ActiveSupport::TestCase
     assert_equal 4, result.value.count
     first_trend = result.value[0]
     second_trend = result.value[1]
+    pp result.value
     assert first_trend.tipCount > second_trend.tipCount
     assert first_trend.homeTeamName
     assert first_trend.awayTeamName
