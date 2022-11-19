@@ -17,7 +17,7 @@ class FilterTips < Service::Base
               filter_already_in_accumulation(filter_by_country(filter_bet_type(filter_by_odd((approved_tips))))).limit(30)
             end
 
-    Service::Result.resolve(@tips)
+    Service::Result.resolve(Tip.all)
   end
 
   private def approved_tips

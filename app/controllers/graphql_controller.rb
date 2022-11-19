@@ -25,6 +25,10 @@ class GraphqlController < ApplicationController
     render json: { message:  "Started Consuming"}
   end
 
+  def health
+    render json: { success: true}, status: :ok
+  end
+
   private
 
   # Handle form data, JSON body, or a blank value
