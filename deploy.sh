@@ -1,4 +1,4 @@
-export AWS_PROFILE=terraform
+# export AWS_PROFILE=terraform
 set -x
 CLUSTER="demo-ecs-cluster"
 SERVICE="bat_backend"
