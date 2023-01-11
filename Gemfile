@@ -19,7 +19,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.15.0', require: false
 gem 'promise.rb'
 gem 'graphql'
 gem 'jwt'
@@ -34,6 +34,7 @@ gem 'mongo'
 gem "sidekiq-cron", "~> 1.1"
 gem 'rails_admin', '~> 2.0'
 gem 'dogstatsd-ruby'
+gem "graphiql-rails"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
@@ -52,7 +53,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'graphiql-rails'
 end
 
 group :test do

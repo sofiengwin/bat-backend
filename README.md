@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+# Get a list of matches for the day
+ - allow filtering
+ - - country
+ - -  league
+ - - matches
+
+ 

@@ -15,20 +15,31 @@ class Tip < ApplicationRecord
   ]
 
   rails_admin do
-    list do 
+    list do
       field :provider_name
       field :match_name
       field :match_country_league
       field :outcome
       field :odd
-      field :bet 
+      field :bet
     end
-    update do 
+    update do
+      field :match_name do
+        formatted_value do
+          value.upcase
+        end
+      end
+      field :user
+      field :match do
+        formatted_value do
+          bindings[:view].tag(:img, { :src => bindings[:object].match.home_team_name }) << value
+        end
+      end
       field :outcome , :enum do
         enum do
           OUTCOME
         end
-      end 
+      end
     end
   end
 
@@ -41,7 +52,7 @@ class Tip < ApplicationRecord
   end
 
   def provider_name
-    "#{created_at} #{user.email}"
+    "#{user.email}"
   end
 
   def match_name

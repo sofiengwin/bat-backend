@@ -100,4 +100,4 @@ mockUser = {
   CreateUser.perform(**mockUser.merge(name: provider[:name], email: "#{provider[:provider]}@guru.com"), provider_id: rand(1...1000), approved_provider_at: Time.now)
 end
 
-# AdminUser.create(email: 'admin@localhost.com', password: 'password')
+# AdminUser.create(email: 'admin@example.com', password: 'password')

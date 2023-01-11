@@ -1,8 +1,12 @@
 #!/bin/bash
+export AWS_PROFILE=terraform
+set -xv
+echo `aws ecs list-tasks --cluster demo-ecs-cluster --service-name bat_backend --query "taskArns"`
+TASK=`aws ecs list-tasks --cluster demo-ecs-cluster --service-name bat_backend --query "taskArns" | jq .[0] | xargs`
 
-TASK=`aws ecs list-tasks --cluster demo-ecs-cluster --service-name bat_backend | jq '.taskArns[0]'`
-
+echo "TASK1"
 echo $TASK
+echo "TASK2"
 echo "${TASK}"
 
-aws ecs execute-command --cluster demo-ecs-cluster --task "arn:aws:ecs:us-east-1:955095246916:task/demo-ecs-cluster/9a61f5be4af04f1b899b5c5be57b7ac6" --container bat_backend --interactive --command "/bin/sh"
+aws ecs execute-command --cluster demo-ecs-cluster --task "${TASK}" --container bat_backend --interactive --command "/bin/bash"

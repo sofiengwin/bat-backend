@@ -7,9 +7,7 @@ Rails.application.routes.draw do
   get "/consume", to: "graphql#consume"
   root to: "graphql#health"
 
-  if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
-  end
+  mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
 
   mount Sidekiq::Web => '/sidekiq'
 end
