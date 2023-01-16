@@ -4,5 +4,6 @@ module Mutations
 
     field :createUser, mutation: CreateUserMutation
     field :createAccumulation, mutation: CreateAccumulationMutation
+    field :createUserTip, mutation: CreateUserTipMutation
   end
 end

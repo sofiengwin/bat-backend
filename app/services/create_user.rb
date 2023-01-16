@@ -1,20 +1,18 @@
 class CreateUser < Service::Create
   field :name
-  field :email, presence: true
-  field :access_token
-  field :token_id
-  field :provider_id
-  field :avatar_url
+  field :username
+  field :provider_id, presence: true
   field :approved_provider_at
+  field :email
+  field :avatar_url
 
-  def initialize(name: nil, email:, access_token:, token_id:, provider_id:, avatar_url:, approved_provider_at: nil)
+  def initialize(name:, provider_id:, approved_provider_at:, email:, avatar_url:)
     @name = name
-    @email = email
-    @access_token = access_token
-    @token_id = token_id
+    @username = name
     @provider_id = provider_id
-    @avatar_url = avatar_url
     @approved_provider_at = approved_provider_at
+    @email = email
+    @avatar_url = avatar_url
   end
 
   def perform

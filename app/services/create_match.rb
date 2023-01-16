@@ -6,7 +6,7 @@ class CreateMatch < Service::Create
   field :league, presence: true
   field :country, presence: true
 
-  def initialize(home_team_name:, away_team_name:, fixture_id:, start_at:, league:, country:) 
+  def initialize(home_team_name:, away_team_name:, fixture_id:, start_at:, league:, country:)
     @home_team_name = home_team_name
     @away_team_name = away_team_name
     @fixture_id = fixture_id

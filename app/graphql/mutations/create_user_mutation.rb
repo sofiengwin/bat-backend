@@ -6,23 +6,24 @@ module Mutations
     end
 
     argument :name, String, required: false
-    argument :email, String, required: true
-    argument :accessToken, String, required: false
-    argument :tokenId, String, required: false
-    argument :providerId, String, required: false
-    argument :avatarUrl, String, required: false
+    argument :accessCode, String, required: true
+    argument :approvedProviderAt, String, required: false
 
     field :userDetails, FindOrCreateType, null: true
     field :errors, [Types::ServiceErrorType], null: true
 
     def resolve(**inputs)
+      cognito_user, = cognito_user_details(inputs[:accessCode])
+      unless cognito_user
+        return { errors: [{'code': 'invalid', 'field': 'providerId'}] }
+      end
+
       result = CreateUser.perform(
-        name: inputs[:name],
-        email: inputs[:email],
-        access_token: inputs[:accessToken],
-        token_id: inputs[:tokenId],
-        provider_id: inputs[:providerId],
-        avatar_url: inputs[:avatarUrl],
+        name: inputs[:name] || cognito_user&.fetch('nickname'),
+        provider_id: cognito_user.fetch('sub'),
+        email: cognito_user.fetch('email'),
+        avatar_url: cognito_user.fetch('picture'),
+        approved_provider_at: inputs[:approvedProviderAt],
       )
 
       if result.succeeded?
@@ -30,6 +31,16 @@ module Mutations
       else
         { errors: ServiceError.from(result.reason) }
       end
+    end
+
+    def cognito_user_details(access_code)
+      cognito_token = Auth::CognitoClient.authorize(access_code)
+
+      return unless cognito_token
+
+      JWT.decode(cognito_token, false, nil)
+    rescue JWT::DecodeError
+      nil
     end
   end
 end

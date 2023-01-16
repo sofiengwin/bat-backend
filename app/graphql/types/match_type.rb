@@ -6,5 +6,7 @@ module Types
     field :score, String, null: true
     field :league, String, null: false
     field :country, String, null: false
-  end 
+    field :fixtureId, String, null: false, method: :fixture_id
+    field :startAt, String, null: false, method: :start_at
+  end
 end

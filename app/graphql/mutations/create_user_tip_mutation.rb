@@ -2,10 +2,11 @@ module Mutations
   class CreateUserTipMutation < BaseMutation
     argument :homeTeamName, String, required: true
     argument :awayTeamName, String, required: true
-    argument :fixtureId, String, required: true
+    argument :fixtureId, ID, required: true
     argument :league, String, required: true
     argument :country, String, required: true
     argument :bet, String, required: true
+    argument :betCategory, String, required: true
     argument :odd, String, required: true
     argument :startAt, String, required: true
 
@@ -22,6 +23,7 @@ module Mutations
         league: args[:league],
         country: args[:country],
         bet: args[:bet],
+        bet_category: args[:betCategory],
         odd: args[:odd],
         start_at: args[:startAt],
         user: context[:current_user],

@@ -4,6 +4,7 @@ module Types
     field :rating, String, null: true
     field :outcome, String, null: false
     field :bet, String, null: false
+    field :bet_category, String, null: false
     association :match, MatchType, null: false
     field :odd, Float, null: false
 

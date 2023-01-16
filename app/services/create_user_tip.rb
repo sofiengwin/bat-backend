@@ -1,14 +1,14 @@
 class CreateUserTip < Service::Base
-	field :home_team_name
-	field :away_team_name
-	field :fixture_id
-	field :league
-	field :country
-	field :bet
-	field :user
-	field :odd
-	field :start_at
-	field :mongo_id
+	field :home_team_name, presence: true
+	field :away_team_name, presence: true
+	field :fixture_id, presence: true
+	field :league, presence: true
+	field :country, presence: true
+	field :bet, presence: true
+	field :bet_category, presence: true
+	field :user, presence: true
+	field :odd, presence: true
+	field :start_at, presence: true
 
 	validate :more_than_three_hours_to_match?
 	validate :only_three_games_per_day?
@@ -20,10 +20,10 @@ class CreateUserTip < Service::Base
 		@league = options[:league]
 		@country = options[:country]
 		@bet = options[:bet]
+		@bet_category = options[:bet_category]
 		@user = options[:user]
 		@odd = options[:odd] || 1.55
-		@start_at = options[:start_at]
-		@mongo_id = options[:mongo_id]
+		@start_at = Time.at(options[:start_at]&.to_i)
 	end
 
 	def perform
@@ -42,10 +42,10 @@ class CreateUserTip < Service::Base
 	private def create_tip(match:)
 		CreateTip.perform(
       bet: bet,
+      bet_category: bet_category,
       match: match,
       user: user,
-      odd: odd || 1.55,
-			mongo_id: mongo_id,
+      odd: odd,
 		)
 	end
 
@@ -59,9 +59,9 @@ class CreateUserTip < Service::Base
       country: country
 		)
 	end
-	
+
 	private def more_than_three_hours_to_match?
-		return unless Time.at(start_at) > 3.hours.ago
+		return unless start_at > 3.hours.ago
 
 		errors.add(:bettingClosed, message: 'Prediction has closed for this match')
 	end

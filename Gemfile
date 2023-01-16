@@ -5,7 +5,6 @@ ruby '2.7.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.4'
-gem 'dotenv-rails', '~>2.7.6', groups: [:development, :test]
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -35,6 +34,7 @@ gem "sidekiq-cron", "~> 1.1"
 gem 'rails_admin', '~> 2.0'
 gem 'dogstatsd-ruby'
 gem "graphiql-rails"
+gem 'aws-sdk-cognitoidentityprovider', '~> 1'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
@@ -57,6 +57,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'spy'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
