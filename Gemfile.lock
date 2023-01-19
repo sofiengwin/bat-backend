@@ -75,7 +75,7 @@ GEM
     builder (3.2.4)
     byebug (11.1.3)
     coderay (1.1.3)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crack (0.4.5)
       rexml
@@ -114,7 +114,7 @@ GEM
     fugit (1.5.0)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
-    globalid (0.5.1)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     graphiql-rails (1.7.0)
       railties
@@ -127,7 +127,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashdiff (1.0.1)
-    i18n (1.8.10)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
@@ -160,7 +160,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.0)
     mini_portile2 (2.8.0)
-    minitest (5.14.4)
+    minitest (5.17.0)
     mongo (2.15.0)
       bson (>= 4.8.2, < 5.0.0)
     msgpack (1.6.0)
@@ -280,7 +280,7 @@ GEM
     temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     webmock (3.13.0)
       addressable (>= 2.3.6)
@@ -289,7 +289,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.4.2)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
