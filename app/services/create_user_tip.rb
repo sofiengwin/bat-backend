@@ -23,7 +23,7 @@ class CreateUserTip < Service::Base
 		@bet_category = options[:bet_category]
 		@user = options[:user]
 		@odd = options[:odd] || 1.55
-		@start_at = Time.at(options[:start_at]&.to_i)
+		@start_at = DateTime.parse(options[:start_at])
 	end
 
 	def perform

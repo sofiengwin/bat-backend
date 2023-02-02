@@ -28,7 +28,7 @@ class CreateUserTipMutationTest < ActionDispatch::IntegrationTest
 
   test 'success' do
     user = create(:user)
-    start_at = 4.hours.ago
+    start_at = "2023-01-21T12:30:00+00:00"
     post(
       graphql_path,
       headers: {'Authorization' => token_for_user(user.id)},

@@ -65,9 +65,9 @@ class GraphqlController < ApplicationController
   end
 
   def current_user
-    # return unless current_user_id
+    return unless current_user_id
 
-    User.first
+    User.find_by(id: current_user_id)
   end
 
   def handle_error_in_development(e)
