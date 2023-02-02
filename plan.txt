@@ -1,0 +1,31 @@
+Frontend
+  - Post Tip
+    - Success and failure handling
+
+  - Deployment
+    - Production deploy pipeline
+
+  - User Ranking
+    - Redesign table
+      - Decide where to put new details
+        - Week
+        - Points
+        - Name
+        - Tab
+
+  - Authentication
+    - Success and failure handling
+
+  - Infrastructure
+    - Production S3 bucket
+    - Production cloudfront distribution
+
+
+Backend
+  - Improve bet generator
+  - User ranking
+  -
+
+  - Infrastructure
+    - Production Infrastructure setup
+    -

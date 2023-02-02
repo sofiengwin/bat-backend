@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_16_022003) do
+ActiveRecord::Schema.define(version: 2023_02_02_045708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,15 @@ ActiveRecord::Schema.define(version: 2023_01_16_022003) do
     t.index ["user_id"], name: "index_tips_on_user_id"
   end
 
+  create_table "user_point_counters", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "awarded_at"
+    t.integer "point", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_point_counters_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -143,4 +152,5 @@ ActiveRecord::Schema.define(version: 2023_01_16_022003) do
   add_foreign_key "points", "users"
   add_foreign_key "tips", "matches"
   add_foreign_key "tips", "users"
+  add_foreign_key "user_point_counters", "users"
 end
