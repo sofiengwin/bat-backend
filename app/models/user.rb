@@ -18,13 +18,13 @@ class User < ApplicationRecord
 
   def monthly_total
     user_point_counters
-      .where(awarded_at: Date.current.beginning_of_month...Date.current.end_of_month)
+      .where(awarded_at: Time.current.beginning_of_month..Time.current.end_of_month)
       .sum(:point)
   end
 
-  def monthly_total
+  def weekly_total
     user_point_counters
-      .where(awarded_at: Date.current.beginning_of_week...Date.current.end_of_week)
+      .where(awarded_at: Time.current.beginning_of_week..Time.current.end_of_week)
       .sum(:point)
   end
 end

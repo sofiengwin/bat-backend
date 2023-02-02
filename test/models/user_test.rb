@@ -3,16 +3,18 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   test 'scoring' do
     user = create(:user)
-    match = create(:match)
-    ['pending', 'won'].each do |outcome|
-      create_list(:tip, 5, outcome: outcome, user: user, match: match)
-      create_list(:accumulation, 5, user: user, outcome: outcome)
+
+    [1.month.ago, Time.current, 3.days.from_now, 8.days.from_now].each do |awarded_at|
+      create(
+        :user_point_counter,
+        user_id: user.id,
+        awarded_at: awarded_at,
+        point: 100
+      )
     end
 
-    create_list(:point, 10, user: user, pointable: Tip.last, value: 10)
-
-    assert_equal 10, user.total_tips
-    assert_equal 5, user.total_wins
-    assert_equal 100, user.total_points
+    assert_equal 400, user.total_points
+    assert_equal 300, user.monthly_total
+    assert_equal 200, user.weekly_total
   end
 end
