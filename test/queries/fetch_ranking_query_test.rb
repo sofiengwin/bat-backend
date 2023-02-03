@@ -4,8 +4,18 @@ class FetchRankingQueryTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
     query fetchRanking {
       fetchRanking {
-        point
-        name
+        weekly {
+          point
+          name
+        }
+        monthly {
+          point
+          name
+        }
+        total {
+          point
+          name
+        }
       }
     }
   GQL
@@ -17,13 +27,14 @@ class FetchRankingQueryTest < ActionDispatch::IntegrationTest
 
     users = [u1, u2, u3]
 
-    4.times do |n|
-      match = create(:match)
-    
-      rand(1...10).times do
-        user = users.sample
-        tip = create(:tip, match: match, user: user)
-        create(:point, pointable: tip, user: user, value: 10)
+    users.each do |user|
+      [1.month.ago, Time.current, 3.days.from_now, 8.days.from_now].each do |awarded_at|
+        create(
+          :user_point_counter,
+          user_id: user.id,
+          awarded_at: awarded_at,
+          point: rand(100)
+        )
       end
     end
 
@@ -37,6 +48,9 @@ class FetchRankingQueryTest < ActionDispatch::IntegrationTest
 
     with_response_data do |json|
       assert_equal 3, json['fetchRanking'].count
+      assert_equal 3, json['fetchRanking']['weekly'].count
+      assert_equal 3, json['fetchRanking']['monthly'].count
+      assert_equal 3, json['fetchRanking']['total'].count
     end
   end
 end
