@@ -8,21 +8,25 @@ class FetchRankingTest <ActiveSupport::TestCase
 
     users = [u1, u2, u3]
 
-    4.times do |n|
-      match = create(:match)
-    
-      rand(1...10).times do
-        user = users.sample
-        tip = create(:tip, match: match, user: user)
-        
-        create(:point, pointable: tip, user: user, value: 10)
+    users.each do |user|
+      [1.month.ago, Time.current, 3.days.from_now, 8.days.from_now].each do |awarded_at|
+        create(
+          :user_point_counter,
+          user_id: user.id,
+          awarded_at: awarded_at,
+          point: rand(100)
+        )
       end
     end
 
     result = FetchRanking.perform
 
     assert result.succeeded?
-    assert_equal 3, result.value.count
-    assert result.value[0].point > result.value[1].point
+    assert_equal result.value['weekly'].count, 3
+    assert_equal result.value['monthly'].count, 3
+    assert_equal result.value['total'].count, 3
+    assert result.value['weekly'][0].point > result.value['weekly'][1].point
+    assert result.value['monthly'][0].point > result.value['monthly'][1].point
+    assert result.value['total'][0].point > result.value['total'][1].point
   end
 end
