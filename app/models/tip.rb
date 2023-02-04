@@ -14,6 +14,12 @@ class Tip < ApplicationRecord
     LOST = 'lost'
   ]
 
+  after_commit on: :update do
+    if previous_changes['outcome'] == ['pending', 'won']
+      AwardPoint.perform(tip: self)
+    end
+  end
+
   rails_admin do
     list do
       field :provider_name
