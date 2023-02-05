@@ -13,7 +13,7 @@ class FilterTipsTest < ActiveSupport::TestCase
       odd: 1.5,
       bet: 'X'
     )
-    in_acca = [create(:tip, match: match, user: user, approved_at: Time.now, bet: 'X').id]
+    in_acca = [create(:tip, match: match, user: user, approved_at: Time.now, bet: 'X', odd: 1.55).id]
 
     result = FilterTips.perform(
       max_odd: 1.7,

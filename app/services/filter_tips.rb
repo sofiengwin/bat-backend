@@ -14,7 +14,7 @@ class FilterTips < Service::Base
     @tips = if match_id
               filter_by_match_id(approved_tips)
             else
-              filter_already_in_accumulation(filter_by_country(filter_bet_type(filter_by_odd((approved_tips))))).limit(30)
+              filter_already_in_accumulation(filter_by_country(filter_by_odd((approved_tips)))).limit(30)
             end
 
     Service::Result.resolve(Tip.all)
@@ -46,11 +46,11 @@ class FilterTips < Service::Base
     relation.joins(:match).where('matches.country = ?', country)
   end
 
-  private def filter_bet_type(relation)
-    return relation unless bet_type
+  # private def filter_bet_type(relation)
+  #   return relation unless bet_type
 
-    relation.where(bet: bet_type)
-  end
+  #   relation.where(bet: bet_type)
+  # end
 
   private def filter_already_in_accumulation(relation)
     return relation if current_tips && current_tips.any?(&:blank?)
