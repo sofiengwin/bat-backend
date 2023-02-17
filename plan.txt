@@ -21,6 +21,11 @@ Frontend
     - Production cloudfront distribution
 
 
+  - Features to remove temporarily
+    - bet generator
+    - offers
+
+
 Backend
   - Improve bet generator
   - User ranking
